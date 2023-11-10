@@ -19,5 +19,6 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/no-unescaped-entities': 0,
     "indent": ["error", 2],
+    "no-unused-vars": "off",
   },
 }

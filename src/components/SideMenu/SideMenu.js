@@ -63,7 +63,7 @@ const MENUS = [
         subChild:false,
 
       },
-      {
+      /* {
         name:'Technology',
         href: '#',
         icon: <TvIcon className={iconStyle}/>,
@@ -94,7 +94,7 @@ const MENUS = [
         current: false,
         subChild:false,
 
-      }
+      } */
     ]
   },
   {
@@ -114,7 +114,7 @@ const MENUS = [
         current: false,
         subChild:false,
       },
-      {
+      /*  {
         name: 'Help',
         href: '/gaming',
         icon: <InformationCircleIcon className={iconStyle}/>,
@@ -133,7 +133,7 @@ const MENUS = [
         icon: <UserGroupIcon className={iconStyle}/>,
         current: false,
         subChild:false,
-      }
+      } */
     ]
   }
 ]
