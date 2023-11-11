@@ -29,7 +29,7 @@ const Timeline = ({
           </h1>
         </div>
         <div>
-          <Button text='Join' onClick={joinGroup}/>  
+          <Button text='Join' onClick={joinGroup} className="hover:bg-indigo-700 bg-indigo-500"/>  
         </div>
       </div>
     </div>

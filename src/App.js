@@ -3,18 +3,20 @@ import SideMenu from './components/SideMenu/SideMenu'
 import Timeline from './components/Timeline/Timeline'
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
-import {getAbout} from './redux/subreddit/action'
-import { redditPageInfo } from './redux/subreddit/selector';
+import {getAbout, getHot} from './redux/subreddit/action'
+import { redditPageInfo,redditHot } from './redux/subreddit/selector';
 import { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import ClassicCard from './components/ClassicCard/ClassicCard';
 
-const App = ({pageInfo, getAbout})=> {
+const App = ({pageInfo,hotNews, getHot,getAbout})=> {
 
   useEffect(() => {
     getAbout();
+    getHot();
   }, []);
 
-  console.log("INFOR",pageInfo)
+  console.log("INFOR",hotNews)
 
   return (
     <div className='px-4'>
@@ -26,7 +28,9 @@ const App = ({pageInfo, getAbout})=> {
         <section className='col-span-4 lg:col-span-3'>
           <Timeline bannerBgImage={pageInfo.banner_img} communityIcon={pageInfo.icon_img} communityName={pageInfo.display_name_prefixed}/>
           <section className='grid grid-cols-3 gap-4 w-full'>
-            <div className='col-span-2'>section 1</div>
+            <div className='col-span-2'>
+              <ClassicCard />
+            </div>
             <div className='col-span-1'>section 2</div>
           </section>
         </section>
@@ -37,11 +41,14 @@ const App = ({pageInfo, getAbout})=> {
 
 const mapStateToProps = createStructuredSelector({
   pageInfo: redditPageInfo,
+  hotNews: redditHot,
 });
 
 App.propTypes = {
   pageInfo: PropTypes.object,
   getAbout: PropTypes.func,
+  getHot: PropTypes.func,
+  hotNews: PropTypes.array,
 };
 
-export default connect(mapStateToProps, { getAbout })(App);
+export default connect(mapStateToProps, { getAbout , getHot})(App);
