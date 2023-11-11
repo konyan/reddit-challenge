@@ -29,7 +29,11 @@ const App = ({pageInfo,hotNews, getHot,getAbout})=> {
           <Timeline bannerBgImage={pageInfo.banner_img} communityIcon={pageInfo.icon_img} communityName={pageInfo.display_name_prefixed}/>
           <section className='grid grid-cols-3 gap-4 w-full'>
             <div className='col-span-2'>
-              <ClassicCard />
+
+              {hotNews && hotNews.map((news,index)=>(
+                <ClassicCard {...news.data} key={news.data.name}/>
+              ))}
+             
             </div>
             <div className='col-span-1'>section 2</div>
           </section>
