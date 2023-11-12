@@ -9,7 +9,7 @@ module.exports = {
       version: 'detect',
     },
   },
-  extends: ['eslint:recommended', 'plugin:react/recommended',],
+  extends: ['eslint:recommended', 'plugin:react/recommended'],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
@@ -18,7 +18,7 @@ module.exports = {
   rules: {
     'react/react-in-jsx-scope': 'off',
     'react/no-unescaped-entities': 0,
-    "indent": ["error", 2],
-    "no-unused-vars": "off",
+    indent: ['error', 2],
+    'no-unused-vars': 'off',
   },
 }

@@ -23,7 +23,7 @@ function classNames(...classes) {
 
 export default function Navbar() {
   return (
-    <Disclosure as="nav" className="bg-white border-b">
+    <Disclosure as="nav" className="border-b bg-white">
       {({ open }) => (
         <>
           <div className="mx-auto px-2 sm:px-4 lg:px-8">
@@ -36,7 +36,6 @@ export default function Navbar() {
                     alt="Your Company"
                   />
                 </div>
-            
               </div>
               <div className="flex flex-1 items-center justify-center px-2 lg:ml-6">
                 <div className="w-full max-w-lg lg:max-w-xs">
@@ -106,7 +105,10 @@ export default function Navbar() {
                         {({ active }) => (
                           <a
                             href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                            className={classNames(
+                              active ? 'bg-gray-100' : '',
+                              'block px-4 py-2 text-sm text-gray-700'
+                            )}
                           >
                             Your Profile
                           </a>
@@ -116,7 +118,10 @@ export default function Navbar() {
                         {({ active }) => (
                           <a
                             href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                            className={classNames(
+                              active ? 'bg-gray-100' : '',
+                              'block px-4 py-2 text-sm text-gray-700'
+                            )}
                           >
                             Settings
                           </a>
@@ -126,7 +131,10 @@ export default function Navbar() {
                         {({ active }) => (
                           <a
                             href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                            className={classNames(
+                              active ? 'bg-gray-100' : '',
+                              'block px-4 py-2 text-sm text-gray-700'
+                            )}
                           >
                             Sign out
                           </a>

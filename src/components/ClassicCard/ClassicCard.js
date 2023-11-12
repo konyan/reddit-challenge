@@ -1,60 +1,83 @@
-import { ArrowUpTrayIcon, ChatBubbleBottomCenterIcon, CommandLineIcon, EllipsisHorizontalIcon, PaperClipIcon, ShareIcon } from '@heroicons/react/24/outline';
-import PropTypes from 'prop-types';
-import PopMenu from '../PopMenu/PopMenu';
-import Button from '../Button/Button';
-import VoteButton from '../VoteButton/VoteButton';
+import {
+  ArrowUpTrayIcon,
+  ChatBubbleBottomCenterIcon,
+  CommandLineIcon,
+  EllipsisHorizontalIcon,
+  FlagIcon,
+  FolderIcon,
+  PaperClipIcon,
+  ShareIcon,
+} from '@heroicons/react/24/outline'
+import PropTypes from 'prop-types'
+import PopMenu from '../PopMenu/PopMenu'
+import Button from '../Button/Button'
+import VoteButton from '../VoteButton/VoteButton'
 
 const ClassicCard = ({
   downs,
-  num_comments:commentCount,
-  link_flair_richtext:linkFlair,
+  num_comments: commentCount,
+  link_flair_richtext: linkFlair,
   ups,
   author,
   url,
   createdAt,
   title,
-}) =>{
+}) => {
+  const voteCount = ups - downs
 
-
-  const voteCount = ups - downs;
-
-  const upVote = () =>{
-    console.log("upVote")
+  const upVote = () => {
+    console.log('upVote')
   }
 
-  const downVote = () =>{
-    console.log("downVote")
+  const downVote = () => {
+    console.log('downVote')
   }
 
-  return(
-    <article className='border-b pb-6 pt-4'>
-      <div className='flex flex-row justify-between'>
-        <div className='flex items-center gap-4'>
-          <img src='https://styles.redditmedia.com/t5_v12c5/styles/profileIcon_snoo-nftv2_bmZ0X2VpcDE1NToxMzdfNmFjYjhmYjgyODgwZDM5YzJiODQ0NmY4Nzc4YTE0ZDM0ZWU2Y2ZiN185NjE4Mw_rare_3971626f-10f5-401f-8c5b-5ad58f7222b9-headshot.png?width=64&height=64&frame=1&auto=webp&crop=64:64,smart&s=d7da51de6c5687fdd7d62fe6d035cf822f09daa3' alt="" className='w-8 h-8 rounded-full'/>
+  return (
+    <article className="border-b pb-6 pt-4">
+      <div className="flex flex-row justify-between">
+        <div className="flex items-center gap-4">
+          <img
+            src="https://styles.redditmedia.com/t5_v12c5/styles/profileIcon_snoo-nftv2_bmZ0X2VpcDE1NToxMzdfNmFjYjhmYjgyODgwZDM5YzJiODQ0NmY4Nzc4YTE0ZDM0ZWU2Y2ZiN185NjE4Mw_rare_3971626f-10f5-401f-8c5b-5ad58f7222b9-headshot.png?width=64&height=64&frame=1&auto=webp&crop=64:64,smart&s=d7da51de6c5687fdd7d62fe6d035cf822f09daa3"
+            alt=""
+            className="h-8 w-8 rounded-full"
+          />
           <p>u/{author}</p>
           <small>{createdAt}</small>
         </div>
-        <div className='flex items-center gap-4'>
-          <PaperClipIcon className='w-6 h-6' color='green'/>
-          <PopMenu/>
+        <div className="flex items-center gap-4">
+          <PaperClipIcon className="h-6 w-6" color="green" />
+          <PopMenu
+            icon={<EllipsisHorizontalIcon className="h-6 w-6" aria-hidden="true" color="black" />}
+            menuItems={[
+              {
+                text: 'Report',
+                icon: <FlagIcon className="mr-4 h-4 w-4 text-black" />,
+              },
+            ]}
+          />
         </div>
       </div>
-      <h2 className='block text-lg font-bold py-4'>
-        {title}
-      </h2>
-      <p className='bg-black/30 inline-block px-3 py-1 rounded-full text-xs'>
-        {linkFlair[0].t}
-      </p>
-      <div className='flex mt-4 gap-4'>
-        <VoteButton voteCount={voteCount} upVote={upVote} downVote={downVote}/>
-        <Button text={commentCount} icon={<ChatBubbleBottomCenterIcon className='w-4 h-4'/>} className="text-black border border-gray-50 hover:border-gray-500"/>
-        <Button text="Share"  icon={<ArrowUpTrayIcon className='w-4 h-4'/>} className="text-black border border-gray-50 hover:border-gray-500"/>
+      <h2 className="block py-4 text-lg font-bold">{title}</h2>
+      <p className="inline-block rounded-full bg-black/30 px-3 py-1 text-xs">{linkFlair[0].t}</p>
+      <div className="mt-4 flex gap-4">
+        <VoteButton voteCount={voteCount} upVote={upVote} downVote={downVote} />
+        <Button
+          text={commentCount}
+          icon={<ChatBubbleBottomCenterIcon className="h-4 w-4" />}
+          className="border border-gray-50 text-black hover:border-gray-500"
+        />
+        <Button
+          text="Share"
+          icon={<ArrowUpTrayIcon className="h-4 w-4" />}
+          className="border border-gray-50 text-black hover:border-gray-500"
+        />
       </div>
     </article>
   )
 }
 
-ClassicCard.propTypes ={
+ClassicCard.propTypes = {
   downs: PropTypes.number.isRequired,
   num_comments: PropTypes.number,
   link_flair_richtext: PropTypes.array,
@@ -65,4 +88,4 @@ ClassicCard.propTypes ={
   title: PropTypes.string.isRequired,
 }
 
-export default ClassicCard;
+export default ClassicCard
