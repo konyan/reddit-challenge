@@ -8,4 +8,7 @@ export const redditNews = createSelector([selectSubReddit], (subreddit) => subre
 
 export const redditSortBy = createSelector([selectSubReddit], (subreddit) => subreddit.sortBy)
 
-export const redditFeedViewType = createSelector([selectSubReddit], (subreddit) => subreddit.feedViewType)
+export const redditFeedViewType = createSelector(
+  [selectSubReddit],
+  (subreddit) => subreddit.feedViewType
+)

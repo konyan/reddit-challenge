@@ -89,4 +89,4 @@ const CommentMain = ({ post }) => {
   )
 }
 
-export default CommentMain;
+export default CommentMain

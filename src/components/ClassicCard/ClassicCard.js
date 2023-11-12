@@ -12,6 +12,7 @@ import PropTypes from 'prop-types'
 import PopMenu from '../PopMenu/PopMenu'
 import Button from '../Button/Button'
 import VoteButton from '../VoteButton/VoteButton'
+import moment from 'moment'
 
 const ClassicCard = ({
   downs,
@@ -43,7 +44,7 @@ const ClassicCard = ({
             className="h-8 w-8 rounded-full"
           />
           <p>u/{author}</p>
-          <small>{createdAt}</small>
+          <small> {moment.unix(createdAt).fromNow()}</small>
         </div>
         <div className="flex items-center gap-4">
           <PaperClipIcon className="h-6 w-6" color="green" />

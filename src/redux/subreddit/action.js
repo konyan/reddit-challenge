@@ -16,7 +16,9 @@ export const getSelectedNews = (subreddit, sortBy, page, after) => async (dispat
   const count = post_per_page * page - post_per_page
   subreddit = subreddit || 'dota2'
   sortBy = sortBy || 'hot'
-  const response = await fetch(`https://www.reddit.com/r/${subreddit}/${sortBy}.json?limit=${post_per_page}&count=${count}&after=${after}`)
+  const response = await fetch(
+    `https://www.reddit.com/r/${subreddit}/${sortBy}.json?limit=${post_per_page}&count=${count}&after=${after}`
+  )
   const json = await response.json()
   dispatch({
     type: SubredditTypes.SELECTED_NEWS,
