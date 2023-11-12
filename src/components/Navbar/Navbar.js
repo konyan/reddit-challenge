@@ -140,7 +140,6 @@ export default function Navbar() {
           </div>
 
           <Disclosure.Panel className="lg:hidden">
-           
             <div className="border-t border-gray-200 pb-3 pt-4">
               <div className="flex items-center px-4">
                 <div className="flex-shrink-0">
