@@ -27,7 +27,7 @@ const Thread = ({ pageInfo }) => {
 
   return (
     <section className="grid w-full grid-cols-3 gap-4">
-      <div className="col-span-2">
+      <div className="md:col-span-2 col-span-3">
         <CommentPage commentList={commentList} />
       </div>
       <div className="col-span-1">

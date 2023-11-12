@@ -10,9 +10,12 @@ import moment from 'moment'
 import React from 'react'
 import Button from '../Button/Button'
 import TextEditor from './Editor'
+import { formatNumber } from '../../utils/setting'
 
 // eslint-disable-next-line react/prop-types
 const CommentMain = ({ post }) => {
+
+  const voteCount = post?.data?.ups - post?.data?.downs
   return (
     <>
       <div className="flex gap-2">
@@ -20,7 +23,7 @@ const CommentMain = ({ post }) => {
           <div className="cursor-pointer rounded-md p-1 hover:bg-gray-200/50">
             <HandThumbUpIcon className="h-3 w-3" />
           </div>
-          <p className="text-xs"> {post?.data?.score.toFixed(2)} </p>
+          <p className="text-xs"> {formatNumber(voteCount)} </p>
 
           <div className="cursor-pointer rounded-md p-1 hover:bg-gray-200/50">
             <HandThumbDownIcon className="h-3 w-3" />
