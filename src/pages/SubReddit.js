@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import Timeline from '../components/Timeline/Timeline'
 import { createStructuredSelector } from 'reselect'
 import { connect } from 'react-redux'
@@ -8,7 +9,7 @@ import {
   redditSortBy,
   redditFeedViewType,
 } from '../redux/subreddit/selector'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import Button from '../components/Button/Button'
 import PopMenu from '../components/PopMenu/PopMenu'
@@ -34,6 +35,7 @@ const SubReddit = ({
   updateFeedViewType
 }) => {
   let [searchParams, setSearchParams] = useSearchParams()
+  const [data , setData] = useState([])
 
 
   const sortByMenus = [
@@ -75,17 +77,18 @@ const SubReddit = ({
   ]
 
   useEffect(()=>{
-    getAbout(SUB_REDDIT)
+    // getAbout(SUB_REDDIT)
   },[])
 
-  useEffect(() => {
-    if (!searchParams.get('page')) {
-      getSelectedNews(SUB_REDDIT, sortBy)
-    } else {
-      getSelectedNews(SUB_REDDIT, sortBy, searchParams.get('page'), news.after)
-    }
-  }, [searchParams, sortBy])
+  useEffect(()=>{
+    if(!news.data) return;
+    setData([...data,...news.data])
+  },[news])
 
+  useEffect(() => {
+    if(!sortBy) return;
+    getSelectedNews(SUB_REDDIT, sortBy, null)
+  }, [sortBy])
 
   const createPost = () => {
     window.open('https://www.reddit.com/r/aww/submit?source_id=t3_1', '_blank')
@@ -102,14 +105,13 @@ const SubReddit = ({
   }
 
   const fetchAgain = () => {
-    const page = parseInt(news.page)+ 1;
-    setSearchParams({ page})
-    getSelectedNews(SUB_REDDIT, sortBy,page, news.after)
+    console.log("after",news.after)
+    getSelectedNews(SUB_REDDIT, sortBy,news.after)
   }
-
+  console.log("redditAfter",news.redditAfter)
 
   return (
-    <>
+    <div>
       {pageInfo && (
         <Timeline
           bannerBgImage={pageInfo.banner_img}
@@ -141,13 +143,13 @@ const SubReddit = ({
             </div>
           </div>
 
-          {news.data.length && <InfiniteList news={news.data} feedViewType={feedViewType} fetchAgain={fetchAgain}/>}
+          {data.length && <InfiniteList news={data} feedViewType={feedViewType} fetchAgain={fetchAgain}/>}
         </div>
         {pageInfo && <div className="col-span-1 relative">
           <Notification pageInfo={pageInfo} />
         </div>}
       </section>
-    </>
+    </div>
   )
 }
 
@@ -162,11 +164,11 @@ SubReddit.propTypes = {
   pageInfo: PropTypes.object,
   getAbout: PropTypes.func,
   getSelectedNews: PropTypes.func,
-  news: PropTypes.array,
+  news: PropTypes.object.isRequired,
   sortBy: PropTypes.string.isRequired,
   feedViewType: PropTypes.string.isRequired,
   updateSortBy: PropTypes.func.isRequired,
   updateFeedViewType: PropTypes.func.isRequired,
 }
 
-export default connect(mapStateToProps, { getAbout, getSelectedNews, updateSortBy ,updateFeedViewType})(SubReddit)
+export default connect(mapStateToProps,  { getAbout, getSelectedNews, updateSortBy ,updateFeedViewType})(SubReddit)

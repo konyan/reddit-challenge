@@ -71,7 +71,7 @@ const ClassicCard = ({
       <div className="mt-4 flex gap-4">
         <VoteButton voteCount={voteCount} upVote={upVote} downVote={downVote} />
         <Button
-          text={commentCount}
+          text={commentCount.toString()}
           icon={<ChatBubbleBottomCenterIcon className="h-4 w-4" />}
           className="border border-gray-50 text-black hover:border-gray-500"
         />

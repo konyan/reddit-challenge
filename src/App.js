@@ -5,6 +5,8 @@ import ThreadPage from './pages/Thread'
 import SubRedditPage from './pages/SubReddit'
 import Navbar from './components/Navbar/Navbar'
 import SideMenu from './components/SideMenu/SideMenu'
+import TestPage from './pages/Test';
+
 const App = () => {
   return (
     <div className="px-4">
@@ -21,6 +23,7 @@ const App = () => {
         >
           <Routes>
             <Route path="/" element={<SubRedditPage />} />
+            <Route path="/test" element={<TestPage />} />
             <Route path="/thread/:commentId/:threadName" element={<ThreadPage />} />
           </Routes>
         </section>

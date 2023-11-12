@@ -1,5 +1,6 @@
 import { SUB_REDDIT } from '../../utils/setting'
 import { SubredditTypes } from './type'
+import {POST_PER_PAGE} from '../../utils/setting';
 
 export const getAbout = (subreddit) => async (dispatch) => {
   subreddit = subreddit || SUB_REDDIT
@@ -7,12 +8,12 @@ export const getAbout = (subreddit) => async (dispatch) => {
 
   try {
     const json = await response.json()
-    dispatch({
+    return  dispatch({
       type: SubredditTypes.ABOUT,
       payload: json.data,
     })
   } catch (error) {
-    dispatch({
+    return dispatch({
       type: SubredditTypes.ERROR,
       payload: {
         errorMessage:error.message
@@ -22,32 +23,32 @@ export const getAbout = (subreddit) => async (dispatch) => {
 
 }
 
-export const getSelectedNews = (subreddit, sortBy, page, after) => async (dispatch) => {
-  const post_per_page = 10
-  page = page || 1
-  const count = post_per_page * page - post_per_page
+export const getSelectedNews = (subreddit, sortBy, after = null) => async (dispatch) => {
   subreddit = subreddit || SUB_REDDIT
   sortBy = sortBy || 'hot'
-  const response = await fetch(
-    `https://www.reddit.com/r/${subreddit}/${sortBy}.json?limit=${post_per_page}&count=${count}&after=${after}`
-  )
+
+  const baseUrl = `https://www.reddit.com/r/${subreddit}/${sortBy}.json`;
+  const params = new URLSearchParams({
+    limit: POST_PER_PAGE,
+    after,
+  });
+
+  const response = await fetch(`${baseUrl}?${params.toString()}`);
 
   try{
     const json = await response.json()
-    dispatch({
+    return dispatch({
       type: SubredditTypes.SELECTED_NEWS,
       payload: {
-        selectedNews: {
-          page,
-          data: json.data.children,
-          after: json.data.after,
-          before: json.data.before,
+        selectedNews:{
+          data:json.data.children,
+          after:json.data.after
         },
         sortBy,
       },
     })
   }catch(error){
-    dispatch({
+    return dispatch({
       type: SubredditTypes.ERROR,
       payload: {
         errorMessage:error.message
@@ -57,7 +58,7 @@ export const getSelectedNews = (subreddit, sortBy, page, after) => async (dispat
 }
 
 export const updateSortBy = (sortBy) => async (dispatch) => {
-  dispatch({
+  return  dispatch({
     type: SubredditTypes.UPDATE_SORT_BY,
     payload: {
       sortBy,
@@ -66,7 +67,7 @@ export const updateSortBy = (sortBy) => async (dispatch) => {
 }
 
 export const updateFeedViewType = (feedViewType) => async (dispatch) => {
-  dispatch({
+  return dispatch({
     type: SubredditTypes.UPDATE_FEED_VIEW_TYPE,
     payload: {
       feedViewType,

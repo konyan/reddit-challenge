@@ -5,10 +5,8 @@ const initialState = {
   sortBy: 'hot',
   feedViewType: 'classic',
   selectedNews: {
-    page: 1,
-    data: [],
+    data:[],
     after: '',
-    before: '',
   },
   error:false,
   errorMessage:''
@@ -25,9 +23,7 @@ const subredditReducer = (state = initialState, action) => {
   case SubredditTypes.SELECTED_NEWS:
     return {
       ...state,
-      selectedNews: {
-        ...action.payload.selectedNews,
-      },
+      selectedNews: {...action.payload.selectedNews},
       sortBy: action.payload.sortBy,
     }
 
@@ -35,6 +31,7 @@ const subredditReducer = (state = initialState, action) => {
     return {
       ...state,
       sortBy: action.payload.sortBy,
+      selectedNews: []
     }
 
   case SubredditTypes.UPDATE_FEED_VIEW_TYPE:

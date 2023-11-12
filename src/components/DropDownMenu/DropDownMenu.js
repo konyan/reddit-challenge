@@ -34,7 +34,7 @@ const DropDownMenu = ({ menu }) => {
                 {menu.data.length &&
                   menu.data.map((m) => {
                     return (
-                      <>
+                      <div key={m.name}>
                         {!m.subChild ? (
                           <li
                             key={m.name}
@@ -90,7 +90,7 @@ const DropDownMenu = ({ menu }) => {
                             )}
                           </Disclosure>
                         )}
-                      </>
+                      </div>
                     )
                   })}
               </ul>

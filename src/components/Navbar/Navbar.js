@@ -101,7 +101,7 @@ export default function Navbar() {
               </div>
               <div className="mr-4 flex items-center gap-2 md:hidden">
                 <div>
-                  <Button text="use App" className="bg-red-500 text-white" />
+                  <Button text="use App" className="bg-red-500 text-white" onClick={()=>{}}/>
                 </div>
                 <MagnifyingGlassIcon className="h-6 w-6 text-gray-400" aria-hidden="true" />
                 <EllipsisHorizontalIcon className="h-4 w-4" />
@@ -112,8 +112,9 @@ export default function Navbar() {
                   text="Get App"
                   icon={<QrCodeIcon className="h-4 w-4" />}
                   className="bg-gray-500 text-white"
+                  onClick={()=>{}}
                 />
-                <Button text="Log In" className="bg-red-500 text-white" />
+                <Button text="Log In" className="bg-red-500 text-white" onClick={()=>{}}/>
 
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-4 flex-shrink-0">
