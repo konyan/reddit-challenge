@@ -18,7 +18,7 @@ const ClassicCard = ({
   link_flair_richtext: linkFlair,
   ups,
   author,
-  createdAt,
+  created_utc:createdAt,
   title,
   id,
   permalink,
@@ -41,6 +41,7 @@ const ClassicCard = ({
     navigate(`/thread/${id}/${linkName}`)
   }
 
+  console.log('linkName', createdAt)
   return (
     <article className="border-b pb-6 pt-4 hover:bg-gray-300 rounded-lg cursor-pointer px-4" onClick={goThread}>
       <div className="flex flex-row justify-between">
@@ -91,7 +92,7 @@ ClassicCard.propTypes = {
   link_flair_richtext: PropTypes.array,
   ups: PropTypes.number.isRequired,
   author: PropTypes.string.isRequired,
-  createdAt: PropTypes.number.isRequired,
+  created_utc: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   permalink: PropTypes.string.isRequired,
