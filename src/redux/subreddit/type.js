@@ -1,4 +1,5 @@
 export const SubredditTypes = {
   ABOUT: 'ABOUT',
-  HOT: 'HOT',
+  SELECTED_NEWS: 'SELECTED_NEWS',
+  UPDATE_SORT_BY: 'UPDATE_SORT_BY',
 }

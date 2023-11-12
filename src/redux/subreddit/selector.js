@@ -4,4 +4,8 @@ const selectSubReddit = (state) => state.subreddit
 
 export const redditPageInfo = createSelector([selectSubReddit], (subreddit) => subreddit.about)
 
-export const redditHot = createSelector([selectSubReddit], (subreddit) => subreddit.hot)
+export const redditNews = createSelector([selectSubReddit], (subreddit) => subreddit.selectedNews)
+
+export const redditSortBy = createSelector([selectSubReddit], (subreddit) => subreddit.sortBy)
+
+export const redditFeedViewType = createSelector([selectSubReddit], (subreddit) => subreddit.feedViewType)

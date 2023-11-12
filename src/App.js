@@ -3,8 +3,8 @@ import SideMenu from './components/SideMenu/SideMenu'
 import Timeline from './components/Timeline/Timeline'
 import { createStructuredSelector } from 'reselect'
 import { connect } from 'react-redux'
-import { getAbout, getHot } from './redux/subreddit/action'
-import { redditPageInfo, redditHot } from './redux/subreddit/selector'
+import { getAbout, getSelectedNews,updateSortBy } from './redux/subreddit/action'
+import { redditPageInfo, redditNews,redditSortBy,redditFeedViewType } from './redux/subreddit/selector'
 import { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import ClassicCard from './components/ClassicCard/ClassicCard'
@@ -19,48 +19,53 @@ import {
   FolderIcon,
   ListBulletIcon,
 } from '@heroicons/react/24/outline'
+import { useSearchParams } from "react-router-dom";
 
-const App = ({ pageInfo, hotNews, getHot, getAbout }) => {
-  const sortBy = 'hot'
+const App = ({ pageInfo, news, getSelectedNews, getAbout,sortBy,feedViewType,updateSortBy }) => {
 
-  const feedViewType = 'card'
+  let [searchParams, setSearchParams] = useSearchParams();
+
 
   useEffect(() => {
-    getAbout()
-    getHot()
-  }, [])
 
+    if(!searchParams.get('page')){
+      getSelectedNews('dota2', sortBy)
+    }else{
+      getSelectedNews('dota2', sortBy, searchParams.get('page'),news.after)
+    }
+
+  }, [searchParams,sortBy])
+  console.log("RO", searchParams.get('page'),news,sortBy);
+
+    
   const createPost = () => {
     window.open('https://www.reddit.com/r/aww/submit?source_id=t3_1', '_blank')
+  }
+
+  const onChangeSortBy = (sortBy) => {
+    updateSortBy(sortBy)
+    console.log("onChangeSortBy",sortBy);
   }
 
   const sortByMenus = [
     {
       text: 'Hot',
-      onClick: () => {
-        console.log('Hot')
-      },
+      onClick: () =>onChangeSortBy('hot'),
       active: true,
     },
     {
       text: 'New',
-      onClick: () => {
-        console.log('New')
-      },
+      onClick: () => onChangeSortBy('new'),
       active: false,
     },
     {
       text: 'Top',
-      onClick: () => {
-        console.log('Top')
-      },
+      onClick: () => onChangeSortBy('top'),
       active: false,
     },
     {
       text: 'Rising',
-      onClick: () => {
-        console.log('Rising')
-      },
+      onClick: () => onChangeSortBy('rising'),
       active: false,
     },
   ]
@@ -97,11 +102,11 @@ const App = ({ pageInfo, hotNews, getHot, getAbout }) => {
             height: 'calc(100vh - 80px)',
           }}
         >
-          <Timeline
+          {pageInfo &&   <Timeline
             bannerBgImage={pageInfo.banner_img}
             communityIcon={pageInfo.icon_img}
             communityName={pageInfo.display_name_prefixed}
-          />
+          />}
 
           <section className="grid w-full grid-cols-3 gap-4">
             <div className="col-span-2">
@@ -115,7 +120,7 @@ const App = ({ pageInfo, hotNews, getHot, getAbout }) => {
                   <p className="mr-4 text-xs">Sort By:</p>
                   <PopMenu
                     icon={<ChevronDownIcon className="h-4 w-4" color="black" />}
-                    text={<p className="text-xs text-black">New</p>}
+                    text={<p className="text-xs text-black uppercase">{sortBy}</p>}
                     menuItems={sortByMenus}
                   />
                   <PopMenu
@@ -126,8 +131,8 @@ const App = ({ pageInfo, hotNews, getHot, getAbout }) => {
                 </div>
               </div>
 
-              {hotNews &&
-                hotNews.map((news, index) => <ClassicCard {...news.data} key={news.data.name} />)}
+              {news.data &&
+                news.data.map((news, index) => <ClassicCard {...news.data} key={news.data.name} />)}
             </div>
             <div className="col-span-1">section 2</div>
           </section>
@@ -139,14 +144,19 @@ const App = ({ pageInfo, hotNews, getHot, getAbout }) => {
 
 const mapStateToProps = createStructuredSelector({
   pageInfo: redditPageInfo,
-  hotNews: redditHot,
+  news: redditNews,
+  sortBy:redditSortBy,
+  feedViewType:redditFeedViewType
 })
 
 App.propTypes = {
   pageInfo: PropTypes.object,
   getAbout: PropTypes.func,
-  getHot: PropTypes.func,
-  hotNews: PropTypes.array,
+  getSelectedNews: PropTypes.func,
+  news: PropTypes.array,
+  sortBy:PropTypes.string.isRequired,
+  feedViewType:PropTypes.string.isRequired,
+  updateSortBy:PropTypes.func.isRequired
 }
 
-export default connect(mapStateToProps, { getAbout, getHot })(App)
+export default connect(mapStateToProps, { getAbout, getSelectedNews ,updateSortBy})(App)
