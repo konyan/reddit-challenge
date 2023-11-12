@@ -8,7 +8,7 @@ const App = () => {
     <>
       <Routes>
         <Route path="/" element={<SubRedditPage />} />
-        <Route path="/comment/:commentId" element={<ThreadPage />} />
+        <Route path="/thread/:commentId/:threadName" element={<ThreadPage />} />
       </Routes>
     </>
   )

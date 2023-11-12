@@ -10,6 +10,7 @@ import PopMenu from '../PopMenu/PopMenu'
 import Button from '../Button/Button'
 import VoteButton from '../VoteButton/VoteButton'
 import moment from 'moment'
+import { useNavigate } from 'react-router-dom'
 
 const ClassicCard = ({
   downs,
@@ -17,11 +18,16 @@ const ClassicCard = ({
   link_flair_richtext: linkFlair,
   ups,
   author,
-  url,
   createdAt,
   title,
+  id,
+  permalink,
 }) => {
   const voteCount = ups - downs
+
+  const linkName = permalink.split('/')[permalink.split('/').length - 2]
+
+  const navigate = useNavigate();
 
   const upVote = () => {
     console.log('upVote')
@@ -32,8 +38,7 @@ const ClassicCard = ({
   }
 
   const goThread = () =>{
-    console.log("goThread")
-    window.open(url, '_blank');
+    navigate(`/thread/${id}/${linkName}`)
   }
 
   return (
@@ -86,9 +91,10 @@ ClassicCard.propTypes = {
   link_flair_richtext: PropTypes.array,
   ups: PropTypes.number.isRequired,
   author: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
   createdAt: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  permalink: PropTypes.string.isRequired,
 }
 
 export default ClassicCard
