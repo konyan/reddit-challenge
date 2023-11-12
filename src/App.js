@@ -10,7 +10,15 @@ import PropTypes from 'prop-types'
 import ClassicCard from './components/ClassicCard/ClassicCard'
 import Button from './components/Button/Button'
 import PopMenu from './components/PopMenu/PopMenu'
-import { ArrowDownIcon, Bars4Icon, ChevronDownIcon, FolderIcon } from '@heroicons/react/24/outline'
+import {
+  ArrowDownIcon,
+  Bars2Icon,
+  Bars3Icon,
+  Bars4Icon,
+  ChevronDownIcon,
+  FolderIcon,
+  ListBulletIcon,
+} from '@heroicons/react/24/outline'
 
 const App = ({ pageInfo, hotNews, getHot, getAbout }) => {
   const sortBy = 'hot'
@@ -32,24 +40,47 @@ const App = ({ pageInfo, hotNews, getHot, getAbout }) => {
       onClick: () => {
         console.log('Hot')
       },
+      active: true,
     },
     {
       text: 'New',
       onClick: () => {
         console.log('New')
       },
+      active: false,
     },
     {
       text: 'Top',
       onClick: () => {
         console.log('Top')
       },
+      active: false,
     },
     {
       text: 'Rising',
       onClick: () => {
         console.log('Rising')
       },
+      active: false,
+    },
+  ]
+
+  const feedViewTypeMenus = [
+    {
+      text: 'Card',
+      onClick: () => {
+        console.log('Card')
+      },
+      active: true,
+      icon: <Bars2Icon className="mr-3 h-4 w-4 text-black" />,
+    },
+    {
+      text: 'Classic',
+      onClick: () => {
+        console.log('Classic')
+      },
+      active: false,
+      icon: <Bars3Icon className="mr-3 h-4 w-4 text-black" />,
     },
   ]
 
@@ -90,12 +121,7 @@ const App = ({ pageInfo, hotNews, getHot, getAbout }) => {
                   <PopMenu
                     icon={<ChevronDownIcon className="h-4 w-4" color="black" />}
                     text={<Bars4Icon className="h-4 w-4 text-black" />}
-                    menuItems={[
-                      {
-                        text: 'Report',
-                        icon: <FolderIcon className="h-4 w-4 text-black" />,
-                      },
-                    ]}
+                    menuItems={feedViewTypeMenus}
                   />
                 </div>
               </div>
