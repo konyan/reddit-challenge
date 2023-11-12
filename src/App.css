@@ -167,7 +167,7 @@
 .left-menu{
   display: flex;
   height: 100vh;
-  justify-content: end;
+  justify-content: flex-end;
   margin-right: 2rem;
 }
 

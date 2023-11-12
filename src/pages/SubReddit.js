@@ -36,41 +36,6 @@ const SubReddit = ({
   let [searchParams, setSearchParams] = useSearchParams()
 
 
-  useEffect(()=>{
-    getAbout(SUB_REDDIT)
-  },[])
-
-  useEffect(() => {
-    if (!searchParams.get('page')) {
-      getSelectedNews(SUB_REDDIT, sortBy)
-    } else {
-      getSelectedNews(SUB_REDDIT, sortBy, searchParams.get('page'), news.after)
-    }
-  }, [searchParams, sortBy])
-
-
-  const createPost = () => {
-    window.open('https://www.reddit.com/r/aww/submit?source_id=t3_1', '_blank')
-  }
-
-  const onChangeSortBy = (sortBy) => {
-    updateSortBy(sortBy)
-    setSearchParams({ sortBy })
-  }
-
-  const onChangeFeedViewType = (feedViewType) => {
-    updateFeedViewType(feedViewType)
-    setSearchParams({ feedViewType })
-  }
-
-  const fetchAgain = () => {
-    console.log('fetch again',news.page);
-    const page = parseInt(news.page)+ 1;
-    console.log(page);
-    setSearchParams({ page})
-    getSelectedNews(SUB_REDDIT, sortBy,page, news.after)
-  }
-
   const sortByMenus = [
     {
       text: 'Hot',
@@ -109,6 +74,40 @@ const SubReddit = ({
     },
   ]
 
+  useEffect(()=>{
+    getAbout(SUB_REDDIT)
+  },[])
+
+  useEffect(() => {
+    if (!searchParams.get('page')) {
+      getSelectedNews(SUB_REDDIT, sortBy)
+    } else {
+      getSelectedNews(SUB_REDDIT, sortBy, searchParams.get('page'), news.after)
+    }
+  }, [searchParams, sortBy])
+
+
+  const createPost = () => {
+    window.open('https://www.reddit.com/r/aww/submit?source_id=t3_1', '_blank')
+  }
+
+  const onChangeSortBy = (sortBy) => {
+    updateSortBy(sortBy)
+    setSearchParams({ sortBy })
+  }
+
+  const onChangeFeedViewType = (feedViewType) => {
+    updateFeedViewType(feedViewType)
+    setSearchParams({ feedViewType })
+  }
+
+  const fetchAgain = () => {
+    const page = parseInt(news.page)+ 1;
+    setSearchParams({ page})
+    getSelectedNews(SUB_REDDIT, sortBy,page, news.after)
+  }
+
+
   return (
     <>
       {pageInfo && (
@@ -144,9 +143,9 @@ const SubReddit = ({
 
           {news.data.length && <InfiniteList news={news.data} feedViewType={feedViewType} fetchAgain={fetchAgain}/>}
         </div>
-        <div className="col-span-1 relative">
+        {pageInfo && <div className="col-span-1 relative">
           <Notification pageInfo={pageInfo} />
-        </div>
+        </div>}
       </section>
     </>
   )
