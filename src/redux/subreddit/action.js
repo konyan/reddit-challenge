@@ -20,19 +20,29 @@ export const getSelectedNews = (subreddit, sortBy, page, after) => async (dispat
   const response = await fetch(
     `https://www.reddit.com/r/${subreddit}/${sortBy}.json?limit=${post_per_page}&count=${count}&after=${after}`
   )
-  const json = await response.json()
-  dispatch({
-    type: SubredditTypes.SELECTED_NEWS,
-    payload: {
-      selectedNews: {
-        page,
-        data: json.data.children,
-        after: json.data.after,
-        before: json.data.before,
+
+  try{
+    const json = await response.json()
+    dispatch({
+      type: SubredditTypes.SELECTED_NEWS,
+      payload: {
+        selectedNews: {
+          page,
+          data: json.data.children,
+          after: json.data.after,
+          before: json.data.before,
+        },
+        sortBy,
       },
-      sortBy,
-    },
-  })
+    })
+  }catch(error){
+    dispatch({
+      type: SubredditTypes.ERROR,
+      payload: {
+        errorMessage:error.message
+      }
+    })
+  }
 }
 
 export const updateSortBy = (sortBy) => async (dispatch) => {

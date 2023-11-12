@@ -7,8 +7,11 @@ const initialState = {
   selectedNews: {
     page: 1,
     data: [],
-    length: 0,
+    after: '',
+    before: '',
   },
+  error:false,
+  errorMessage:''
 }
 
 const subredditReducer = (state = initialState, action) => {
@@ -22,7 +25,9 @@ const subredditReducer = (state = initialState, action) => {
   case SubredditTypes.SELECTED_NEWS:
     return {
       ...state,
-      selectedNews: action.payload.selectedNews,
+      selectedNews: {
+        ...action.payload.selectedNews,
+      },
       sortBy: action.payload.sortBy,
     }
 

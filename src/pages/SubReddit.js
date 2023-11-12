@@ -63,6 +63,13 @@ const SubReddit = ({
     setSearchParams({ feedViewType })
   }
 
+  const fetchAgain = () => {
+    console.log('fetch again',news.page);
+    const page = parseInt(news.page)+ 1;
+    console.log(page);
+    setSearchParams({ page})
+    getSelectedNews(SUB_REDDIT, sortBy,page, news.after)
+  }
 
   const sortByMenus = [
     {
@@ -135,7 +142,7 @@ const SubReddit = ({
             </div>
           </div>
 
-          {news.data.length && <InfiniteList news={news.data} feedViewType={feedViewType}/>}
+          {news.data.length && <InfiniteList news={news.data} feedViewType={feedViewType} fetchAgain={fetchAgain}/>}
         </div>
         <div className="col-span-1 relative">
           <Notification pageInfo={pageInfo} />
