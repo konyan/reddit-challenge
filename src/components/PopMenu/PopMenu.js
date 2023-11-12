@@ -1,9 +1,8 @@
 import { Menu, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 import PropTypes from 'prop-types'
-import { FolderIcon } from '@heroicons/react/24/outline'
 
-const PopMenu = ({ icon, text, active, menuItems }) => {
+const PopMenu = ({ icon, text,  menuItems }) => {
   return (
     <div>
       <Menu as="div" className="relative inline-block text-left">
@@ -50,22 +49,6 @@ PopMenu.propTypes = {
   text: PropTypes.element,
   active: PropTypes.string,
   menuItems: PropTypes.array.isRequired,
-}
-
-function EditInactiveIcon(props) {
-  return (
-    <svg {...props} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M4 13V16H7L16 7L13 4L4 13Z" fill="#EDE9FE" stroke="#A78BFA" strokeWidth="2" />
-    </svg>
-  )
-}
-
-function EditActiveIcon(props) {
-  return (
-    <svg {...props} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M4 13V16H7L16 7L13 4L4 13Z" fill="#8B5CF6" stroke="#C4B5FD" strokeWidth="2" />
-    </svg>
-  )
 }
 
 export default PopMenu

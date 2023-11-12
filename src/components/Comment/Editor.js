@@ -1,10 +1,8 @@
 /* eslint-disable react/prop-types */
 import 'quill/dist/quill.snow.css'
-import { useState } from 'react'
 import ReactQuill from 'react-quill'
 
 const TextEditor = ({ callback, value }) => {
-  const [data, setData] = useState('')
   const modules = {
     toolbar: [
       [{ size: ['small', false, 'large', 'huge'] }],

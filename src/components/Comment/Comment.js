@@ -45,10 +45,6 @@ const Comment = ({ handleInsertNode, handleEditNode, handleDeleteNode, comment }
     if (editMode) setEditMode(false)
   }
 
-  const handleDelete = () => {
-    handleDeleteNode(comment.id)
-  }
-
   return (
     <div>
       <div className={comment.id === 1 ? 'inputContainer w-full' : ' flex pt-3'}>
@@ -59,6 +55,7 @@ const Comment = ({ handleInsertNode, handleEditNode, handleDeleteNode, comment }
                 autoFocus
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="type..."
+                value={input}
               />
 
               <Action className="reply comment" type="COMMENT" handleClick={onAddComment} />

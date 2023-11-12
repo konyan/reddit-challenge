@@ -1,12 +1,9 @@
 import {
   ArrowUpTrayIcon,
   ChatBubbleBottomCenterIcon,
-  CommandLineIcon,
   EllipsisHorizontalIcon,
   FlagIcon,
-  FolderIcon,
   PaperClipIcon,
-  ShareIcon,
 } from '@heroicons/react/24/outline'
 import PropTypes from 'prop-types'
 import PopMenu from '../PopMenu/PopMenu'
@@ -34,8 +31,13 @@ const ClassicCard = ({
     console.log('downVote')
   }
 
+  const goThread = () =>{
+    console.log("goThread")
+    window.open(url, '_blank');
+  }
+
   return (
-    <article className="border-b pb-6 pt-4">
+    <article className="border-b pb-6 pt-4 hover:bg-gray-300 rounded-lg cursor-pointer px-4" onClick={goThread}>
       <div className="flex flex-row justify-between">
         <div className="flex items-center gap-4">
           <img

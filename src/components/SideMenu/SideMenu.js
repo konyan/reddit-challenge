@@ -1,19 +1,12 @@
 import {
-  AcademicCapIcon,
   ArrowTrendingUpIcon,
-  BookOpenIcon,
   BriefcaseIcon,
   CurrencyRupeeIcon,
   GlobeAltIcon,
-  HeartIcon,
   HomeIcon,
-  InformationCircleIcon,
   MegaphoneIcon,
-  MusicalNoteIcon,
   PuzzlePieceIcon,
   ScissorsIcon,
-  TvIcon,
-  UserGroupIcon,
 } from '@heroicons/react/24/outline'
 import DropDownMenu from '../DropDownMenu/DropDownMenu'
 

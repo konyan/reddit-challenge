@@ -7,15 +7,20 @@ import CommentPage from '../components/Comment/CommentPage'
 import Notification from '../components/Notification/Notification'
 import { getAbout } from '../redux/subreddit/action'
 import { redditPageInfo } from '../redux/subreddit/selector'
+import { useParams } from 'react-router-dom'
 
 const Thread = ({ pageInfo }) => {
   const [commentList, setCommentList] = useState([])
 
+  const {commentId} = useParams();
+
   const getComment = async () => {
     const response = await fetch(
-      `https://www.reddit.com/r/DotA2/comments/17svit4/still_the_best_ti_win_celebration_ever/about.json`
+      `https://www.reddit.com/r/DotA2/comments/${commentId}/still_the_best_ti_win_celebration_ever/about.json`
     )
     const json = await response.json()
+
+    console.log("JSON",json);
     setCommentList(json)
   }
 

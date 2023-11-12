@@ -1,7 +1,7 @@
 import { ArrowSmallDownIcon, ArrowSmallUpIcon } from '@heroicons/react/24/outline'
 import PropTypes from 'prop-types'
 
-const VoteButton = ({ voteCount, upVote, downVote }) => {
+const VoteButton = ({ voteCount, upVote }) => {
   return (
     <div
       type="button"
