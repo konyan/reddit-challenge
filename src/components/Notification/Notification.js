@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import React, { useRef, useState } from 'react'
 import Button from '../Button/Button'
 import Accordion from '../Accordion/Accordion'
+import {SUB_REDDIT} from '../../utils/setting'
 
 // eslint-disable-next-line react/prop-types
 const Notification = ({ pageInfo }) => {
@@ -17,8 +18,8 @@ const Notification = ({ pageInfo }) => {
     'Twitter',
     'discord',
     'offical dota blog',
-    'dota2 wiki',
-    'dota 2 bug character',
+    `${SUB_REDDIT} wiki`,
+    `${SUB_REDDIT} bug character`,
     'recommend game vods',
     'patch thread archieve',
   ]

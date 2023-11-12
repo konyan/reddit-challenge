@@ -13,6 +13,7 @@ import {
 } from '@heroicons/react/24/outline'
 import { Fragment } from 'react'
 import Button from '../Button/Button'
+import { SUB_REDDIT } from '../../utils/setting'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -84,7 +85,7 @@ export default function Navbar() {
                           className="h-4 w-4 rounded-full"
                           style={{ backgroundColor: 'rgb(0, 121, 211)' }}
                         />
-                        <p className=" text-white">r/DotA2</p>
+                        <p className=" text-white">r/{SUB_REDDIT}</p>
                         <XCircleIcon className="h-4 w-4 text-white" />
                       </div>
                     </div>

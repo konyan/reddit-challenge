@@ -22,6 +22,7 @@ import {
   ChevronDownIcon,
 } from '@heroicons/react/24/outline'
 import { useSearchParams } from 'react-router-dom'
+import { SUB_REDDIT } from '../utils/setting'
 
 const SubReddit = ({
   pageInfo,
@@ -37,18 +38,18 @@ const SubReddit = ({
 
 
   useEffect(()=>{
-    getAbout('dota2')
+    getAbout(SUB_REDDIT)
   },[])
 
   useEffect(() => {
     if (!searchParams.get('page')) {
-      getSelectedNews('dota2', sortBy)
+      getSelectedNews(SUB_REDDIT, sortBy)
     } else {
-      getSelectedNews('dota2', sortBy, searchParams.get('page'), news.after)
+      getSelectedNews(SUB_REDDIT, sortBy, searchParams.get('page'), news.after)
     }
   }, [searchParams, sortBy])
 
-  console.log('SubReddit', feedViewType)
+  console.log('SubReddit', feedViewType,SUB_REDDIT)
 
   const createPost = () => {
     window.open('https://www.reddit.com/r/aww/submit?source_id=t3_1', '_blank')
