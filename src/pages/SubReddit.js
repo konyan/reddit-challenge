@@ -77,7 +77,7 @@ const SubReddit = ({
   ]
 
   useEffect(()=>{
-    // getAbout(SUB_REDDIT)
+    getAbout(SUB_REDDIT)
   },[])
 
   useEffect(()=>{
