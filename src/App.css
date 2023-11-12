@@ -162,3 +162,22 @@
   background-color: hsl(235, 50%, 74%);
   transition: background-color 100ms ease-in-out;
 }
+
+
+.left-menu{
+  display: flex;
+  height: 100vh;
+  justify-content: end;
+  margin-right: 2rem;
+}
+
+@media screen and (max-width: 1024px) {
+  .left-menu{
+    display: none;
+  }
+}
+
+.right-menu{
+  flex: 1;
+  height: 100vh;
+}

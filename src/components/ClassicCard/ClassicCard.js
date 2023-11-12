@@ -41,7 +41,6 @@ const ClassicCard = ({
     navigate(`/thread/${id}/${linkName}`)
   }
 
-  console.log('linkName', createdAt)
   return (
     <article className="border-b pb-6 pt-4 hover:bg-gray-300 rounded-lg cursor-pointer px-4" onClick={goThread}>
       <div className="flex flex-row justify-between">

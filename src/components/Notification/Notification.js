@@ -62,7 +62,7 @@ const Notification = ({ pageInfo }) => {
     'EsportsArtwork',
   ]
   return (
-    <div className="space-y-5">
+    <div className="space-y-5 sticky top-0">
       <div className="divide-y rounded-md border p-5 shadow-sm">
         <div>
           <h2 className="text-[#818384]">About Community</h2>

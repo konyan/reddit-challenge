@@ -12,7 +12,6 @@ const initialState = {
 }
 
 const subredditReducer = (state = initialState, action) => {
-  console.log('subredditReducer', action.type)
   switch (action.type) {
   case SubredditTypes.ABOUT:
     return {

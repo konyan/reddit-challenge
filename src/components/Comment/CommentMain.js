@@ -13,7 +13,6 @@ import TextEditor from './Editor'
 
 // eslint-disable-next-line react/prop-types
 const CommentMain = ({ post }) => {
-  console.log(post)
   return (
     <>
       <div className="flex gap-2">

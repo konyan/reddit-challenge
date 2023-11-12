@@ -1,5 +1,3 @@
-import Navbar from '../components/Navbar/Navbar'
-import SideMenu from '../components/SideMenu/SideMenu'
 import Timeline from '../components/Timeline/Timeline'
 import { createStructuredSelector } from 'reselect'
 import { connect } from 'react-redux'
@@ -12,7 +10,6 @@ import {
 } from '../redux/subreddit/selector'
 import { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import ClassicCard from '../components/ClassicCard/ClassicCard'
 import Button from '../components/Button/Button'
 import PopMenu from '../components/PopMenu/PopMenu'
 import {
@@ -23,6 +20,8 @@ import {
 } from '@heroicons/react/24/outline'
 import { useSearchParams } from 'react-router-dom'
 import { SUB_REDDIT } from '../utils/setting'
+import InfiniteList from '../components/InfiniteList/InfiniteList'
+import Notification from '../components/Notification/Notification'
 
 const SubReddit = ({
   pageInfo,
@@ -49,7 +48,6 @@ const SubReddit = ({
     }
   }, [searchParams, sortBy])
 
-  console.log('SubReddit', feedViewType,SUB_REDDIT)
 
   const createPost = () => {
     window.open('https://www.reddit.com/r/aww/submit?source_id=t3_1', '_blank')
@@ -105,57 +103,45 @@ const SubReddit = ({
   ]
 
   return (
-    <div className="px-4">
-      <Navbar />
-      <div className="mx-auto mt-8 grid w-full grid-cols-4 gap-4">
-        <section className="col-span-1 hidden h-[1200px] overflow-scroll lg:block">
-          <SideMenu />
-        </section>
-        <section
-          className="col-span-4 overflow-scroll pb-8 lg:col-span-3"
-          style={{
-            height: 'calc(100vh - 80px)',
-          }}
-        >
-          {pageInfo && (
-            <Timeline
-              bannerBgImage={pageInfo.banner_img}
-              communityIcon={pageInfo.icon_img}
-              communityName={pageInfo.display_name_prefixed}
+    <>
+      {pageInfo && (
+        <Timeline
+          bannerBgImage={pageInfo.banner_img}
+          communityIcon={pageInfo.icon_img}
+          communityName={pageInfo.display_name_prefixed}
+        />
+      )}
+
+      <section className="grid w-full grid-cols-3 gap-4">
+        <div className="md:col-span-2 col-span-3">
+          <div className="flex justify-between pb-4">
+            <Button
+              text="Create a Post"
+              onClick={createPost}
+              className="border text-black hover:bg-gray-100"
             />
-          )}
-
-          <section className="grid w-full grid-cols-3 gap-4">
-            <div className="col-span-2">
-              <div className="flex justify-between pb-4">
-                <Button
-                  text="Create a Post"
-                  onClick={createPost}
-                  className="border text-black hover:bg-gray-100"
-                />
-                <div className="flex flex-row items-center justify-center">
-                  <p className="mr-4 text-xs">Sort By:</p>
-                  <PopMenu
-                    icon={<ChevronDownIcon className="h-4 w-4" color="black" />}
-                    text={<p className="text-xs uppercase text-black">{sortBy}</p>}
-                    menuItems={sortByMenus}
-                  />
-                  <PopMenu
-                    icon={<ChevronDownIcon className="h-4 w-4" color="black" />}
-                    text={<Bars4Icon className="h-4 w-4 text-black" />}
-                    menuItems={feedViewTypeMenus}
-                  />
-                </div>
-              </div>
-
-              {news.data &&
-                news.data.map((news) => feedViewType === "classic" ?  <ClassicCard {...news.data} key={news.data.name} /> : null)}
+            <div className="flex flex-row items-center justify-center">
+              <p className="mr-4 text-xs">Sort By:</p>
+              <PopMenu
+                icon={<ChevronDownIcon className="h-4 w-4" color="black" />}
+                text={<p className="text-xs uppercase text-black">{sortBy}</p>}
+                menuItems={sortByMenus}
+              />
+              <PopMenu
+                icon={<ChevronDownIcon className="h-4 w-4" color="black" />}
+                text={<Bars4Icon className="h-4 w-4 text-black" />}
+                menuItems={feedViewTypeMenus}
+              />
             </div>
-            <div className="col-span-1">section 2</div>
-          </section>
-        </section>
-      </div>
-    </div>
+          </div>
+
+          {news.data.length && <InfiniteList news={news.data} feedViewType={feedViewType}/>}
+        </div>
+        <div className="col-span-1 relative">
+          <Notification pageInfo={pageInfo} />
+        </div>
+      </section>
+    </>
   )
 }
 

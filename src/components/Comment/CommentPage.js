@@ -3,11 +3,9 @@ import { useEffect, useState } from 'react'
 import useNode from '../../hooks/useNode'
 import Comment from './Comment'
 import CommentMain from './CommentMain'
-// import './styles.css'
 
 const CommentPage = ({ commentList }) => {
   const [commentsData, setCommentsData] = useState(commentList)
-  console.log(commentList)
 
   const { insertNode, editNode, deleteNode } = useNode()
 
