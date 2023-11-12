@@ -3,7 +3,7 @@ import { SubredditTypes } from './type'
 const initialState = {
   about: {},
   sortBy: 'hot',
-  feedViewType: 'card',
+  feedViewType: 'classic',
   selectedNews: {
     page: 1,
     data: [],
@@ -28,10 +28,15 @@ const subredditReducer = (state = initialState, action) => {
     }
 
   case SubredditTypes.UPDATE_SORT_BY:
-    console.log('UPDATE_SORT_BY', action.payload.sortBy)
     return {
       ...state,
       sortBy: action.payload.sortBy,
+    }
+
+  case SubredditTypes.UPDATE_FEED_VIEW_TYPE:
+    return {
+      ...state,
+      feedViewType: action.payload.feedViewType,
     }
   default:
     return state

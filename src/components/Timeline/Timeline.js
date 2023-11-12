@@ -28,7 +28,7 @@ const Timeline = ({ bannerBgImage, communityIcon, communityName }) => {
           <h1 className="xs:text-xl ml-4 text-4xl font-bold">{communityName}</h1>
         </div>
         <div>
-          <Button text="Join" onClick={joinGroup} className="bg-indigo-500 hover:bg-indigo-700" />
+          <Button text="Join" onClick={joinGroup} className="bg-indigo-500 hover:bg-indigo-700 text-white" />
         </div>
       </div>
     </div>

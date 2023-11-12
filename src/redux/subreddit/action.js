@@ -42,3 +42,12 @@ export const updateSortBy = (sortBy) => async (dispatch) => {
     },
   })
 }
+
+export const updateFeedViewType = (feedViewType) => async (dispatch) => {
+  dispatch({
+    type: SubredditTypes.UPDATE_FEED_VIEW_TYPE,
+    payload: {
+      feedViewType,
+    },
+  })
+}

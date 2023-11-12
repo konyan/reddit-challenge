@@ -3,7 +3,7 @@ import SideMenu from '../components/SideMenu/SideMenu'
 import Timeline from '../components/Timeline/Timeline'
 import { createStructuredSelector } from 'reselect'
 import { connect } from 'react-redux'
-import { getAbout, getSelectedNews, updateSortBy } from '../redux/subreddit/action'
+import { getAbout, getSelectedNews, updateSortBy,updateFeedViewType } from '../redux/subreddit/action'
 import {
   redditPageInfo,
   redditNews,
@@ -29,8 +29,16 @@ const SubReddit = ({
   getSelectedNews,
   sortBy,
   updateSortBy,
+  getAbout,
+  feedViewType,
+  updateFeedViewType
 }) => {
   let [searchParams, setSearchParams] = useSearchParams()
+
+
+  useEffect(()=>{
+    getAbout('dota2')
+  },[])
 
   useEffect(() => {
     if (!searchParams.get('page')) {
@@ -39,7 +47,8 @@ const SubReddit = ({
       getSelectedNews('dota2', sortBy, searchParams.get('page'), news.after)
     }
   }, [searchParams, sortBy])
-  console.log('RO', searchParams.get('page'), news, sortBy)
+
+  console.log('SubReddit', feedViewType)
 
   const createPost = () => {
     window.open('https://www.reddit.com/r/aww/submit?source_id=t3_1', '_blank')
@@ -49,6 +58,12 @@ const SubReddit = ({
     updateSortBy(sortBy)
     setSearchParams({ sortBy })
   }
+
+  const onChangeFeedViewType = (feedViewType) => {
+    updateFeedViewType(feedViewType)
+    setSearchParams({ feedViewType })
+  }
+
 
   const sortByMenus = [
     {
@@ -76,18 +91,14 @@ const SubReddit = ({
   const feedViewTypeMenus = [
     {
       text: 'Card',
-      onClick: () => {
-        console.log('Card')
-      },
-      active: true,
+      onClick: () =>onChangeFeedViewType('card'),
+      active: feedViewType === 'card',
       icon: <Bars2Icon className="mr-3 h-4 w-4 text-black" />,
     },
     {
       text: 'Classic',
-      onClick: () => {
-        console.log('Classic')
-      },
-      active: false,
+      onClick: () => onChangeFeedViewType('classic'),
+      active: feedViewType === 'classic',
       icon: <Bars3Icon className="mr-3 h-4 w-4 text-black" />,
     },
   ]
@@ -137,7 +148,7 @@ const SubReddit = ({
               </div>
 
               {news.data &&
-                news.data.map((news) => <ClassicCard {...news.data} key={news.data.name} />)}
+                news.data.map((news) => feedViewType === "classic" ?  <ClassicCard {...news.data} key={news.data.name} /> : null)}
             </div>
             <div className="col-span-1">section 2</div>
           </section>
@@ -162,6 +173,7 @@ SubReddit.propTypes = {
   sortBy: PropTypes.string.isRequired,
   feedViewType: PropTypes.string.isRequired,
   updateSortBy: PropTypes.func.isRequired,
+  updateFeedViewType: PropTypes.func.isRequired,
 }
 
-export default connect(mapStateToProps, { getAbout, getSelectedNews, updateSortBy })(SubReddit)
+export default connect(mapStateToProps, { getAbout, getSelectedNews, updateSortBy ,updateFeedViewType})(SubReddit)
