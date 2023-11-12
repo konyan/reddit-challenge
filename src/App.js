@@ -44,29 +44,29 @@ const App = ({ pageInfo, news, getSelectedNews, getAbout,sortBy,feedViewType,upd
 
   const onChangeSortBy = (sortBy) => {
     updateSortBy(sortBy)
-    console.log("onChangeSortBy",sortBy);
+    setSearchParams({ sortBy });
   }
 
   const sortByMenus = [
     {
       text: 'Hot',
       onClick: () =>onChangeSortBy('hot'),
-      active: true,
+      active: sortBy === 'hot',
     },
     {
       text: 'New',
       onClick: () => onChangeSortBy('new'),
-      active: false,
+      active: sortBy === 'new',
     },
     {
       text: 'Top',
       onClick: () => onChangeSortBy('top'),
-      active: false,
+      active: sortBy === 'top',
     },
     {
       text: 'Rising',
       onClick: () => onChangeSortBy('rising'),
-      active: false,
+      active: sortBy === 'rising',
     },
   ]
 
