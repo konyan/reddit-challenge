@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import ClassicCard from '../ClassicCard/ClassicCard';
 import { useEffect, useRef } from 'react';
+import Card from '../Card/Card';
 
 const InfiniteList = ({news,feedViewType,fetchAgain})=>{
 
@@ -29,7 +30,7 @@ const InfiniteList = ({news,feedViewType,fetchAgain})=>{
     <section>
       {
         news.map((item,index)=>
-          feedViewType === 'classic' && <ClassicCard {...item.data} key={index}/>
+          feedViewType === 'classic' ? <ClassicCard {...item.data} key={index}/> : <Card {...item.data} key={index}/> 
         )
       }
       <p className='bg-red-500 px-6 text-center block py-6' ref={loaderRef}>loading....</p>
