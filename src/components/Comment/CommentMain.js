@@ -41,6 +41,11 @@ const CommentMain = ({ post }) => {
               {post?.data?.url_overridden_by_dest}
             </a>
           </div>
+          <div dangerouslySetInnerHTML={{
+            __html: post?.data?.selftext
+          }} className="text-sm mt-5 leading-6"
+          >
+          </div>
           <div className="mt-5 flex justify-between gap-3">
             <div className="flex gap-3">
               <div className="flex cursor-pointer items-center gap-1">
