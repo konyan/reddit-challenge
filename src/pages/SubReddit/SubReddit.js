@@ -1,28 +1,23 @@
-/* eslint-disable no-unused-vars */
-import Timeline from '../components/Timeline/Timeline'
+import Timeline from '../../components/Timeline/Timeline'
 import { createStructuredSelector } from 'reselect'
 import { connect } from 'react-redux'
-import { getAbout, getSelectedNews, updateSortBy,updateFeedViewType } from '../redux/subreddit/action'
+import { getAbout, getSelectedNews, updateSortBy,updateFeedViewType } from '../../redux/subreddit/action'
 import {
   redditPageInfo,
   redditNews,
   redditSortBy,
   redditFeedViewType,
-} from '../redux/subreddit/selector'
-import { useEffect, useState } from 'react'
+} from '../../redux/subreddit/selector'
 import PropTypes from 'prop-types'
-import Button from '../components/Button/Button'
-import PopMenu from '../components/PopMenu/PopMenu'
+import Button from '../../components/Button/Button'
+import PopMenu from '../../components/PopMenu/PopMenu'
 import {
-  Bars2Icon,
-  Bars3Icon,
   Bars4Icon,
   ChevronDownIcon,
 } from '@heroicons/react/24/outline'
-import { useSearchParams } from 'react-router-dom'
-import { SUB_REDDIT } from '../utils/setting'
-import InfiniteList from '../components/InfiniteList/InfiniteList'
-import Notification from '../components/Notification/Notification'
+import InfiniteList from '../../components/InfiniteList/InfiniteList'
+import Notification from '../../components/Notification/Notification'
+import useSubReddit from './useSubReddit'
 
 const SubReddit = ({
   pageInfo,
@@ -34,81 +29,16 @@ const SubReddit = ({
   feedViewType,
   updateFeedViewType
 }) => {
-  let [searchParams, setSearchParams] = useSearchParams()
-  const [data , setData] = useState([])
 
-
-  const sortByMenus = [
-    {
-      text: 'Hot',
-      onClick: () => onChangeSortBy('hot'),
-      active: sortBy === 'hot',
-    },
-    {
-      text: 'New',
-      onClick: () => onChangeSortBy('new'),
-      active: sortBy === 'new',
-    },
-    {
-      text: 'Top',
-      onClick: () => onChangeSortBy('top'),
-      active: sortBy === 'top',
-    },
-    {
-      text: 'Rising',
-      onClick: () => onChangeSortBy('rising'),
-      active: sortBy === 'rising',
-    },
-  ]
-
-  const feedViewTypeMenus = [
-    {
-      text: 'Card',
-      onClick: () =>onChangeFeedViewType('card'),
-      active: feedViewType === 'card',
-      icon: <Bars2Icon className="mr-3 h-4 w-4 text-black" />,
-    },
-    {
-      text: 'Classic',
-      onClick: () => onChangeFeedViewType('classic'),
-      active: feedViewType === 'classic',
-      icon: <Bars3Icon className="mr-3 h-4 w-4 text-black" />,
-    },
-  ]
-
-  useEffect(()=>{
-    getAbout(SUB_REDDIT)
-  },[])
-
-  useEffect(()=>{
-    if(!news.data) return;
-    setData([...data,...news.data])
-  },[news])
-
-  useEffect(() => {
-    if(!sortBy) return;
-    getSelectedNews(SUB_REDDIT, sortBy, null)
-  }, [sortBy])
-
-  const createPost = () => {
-    window.open('https://www.reddit.com/r/aww/submit?source_id=t3_1', '_blank')
-  }
-
-  const onChangeSortBy = (sortBy) => {
-    updateSortBy(sortBy)
-    setSearchParams({ sortBy })
-  }
-
-  const onChangeFeedViewType = (feedViewType) => {
-    updateFeedViewType(feedViewType)
-    setSearchParams({ feedViewType })
-  }
-
-  const fetchAgain = () => {
-    console.log("after",news.after)
-    getSelectedNews(SUB_REDDIT, sortBy,news.after)
-  }
-  console.log("redditAfter",news.redditAfter)
+  const {sortByMenus,feedViewTypeMenus,fetchAgain,createPost,data} = useSubReddit({
+    news,
+    getSelectedNews,
+    sortBy,
+    updateSortBy,
+    getAbout,
+    feedViewType,
+    updateFeedViewType
+  });
 
   return (
     <div>

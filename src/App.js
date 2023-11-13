@@ -2,10 +2,9 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import ThreadPage from './pages/Thread'
-import SubRedditPage from './pages/SubReddit'
+import SubRedditPage from './pages/SubReddit/SubReddit'
 import Navbar from './components/Navbar/Navbar'
 import SideMenu from './components/SideMenu/SideMenu'
-import TestPage from './pages/Test';
 
 const App = () => {
   return (
@@ -23,7 +22,6 @@ const App = () => {
         >
           <Routes>
             <Route path="/" element={<SubRedditPage />} />
-            <Route path="/test" element={<TestPage />} />
             <Route path="/thread/:commentId/:threadName" element={<ThreadPage />} />
           </Routes>
         </section>
