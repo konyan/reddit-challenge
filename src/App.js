@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
-import ThreadPage from './pages/Thread'
+import ThreadPage from './pages/Thread/Thread'
 import SubRedditPage from './pages/SubReddit/SubReddit'
 import Navbar from './components/Navbar/Navbar'
 import SideMenu from './components/SideMenu/SideMenu'

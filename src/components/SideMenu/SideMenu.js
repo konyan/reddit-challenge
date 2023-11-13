@@ -9,6 +9,7 @@ import {
   ScissorsIcon,
 } from '@heroicons/react/24/outline'
 import DropDownMenu from '../DropDownMenu/DropDownMenu'
+import { Link } from 'react-router-dom'
 
 const HOME_MENUS = [
   {
@@ -151,12 +152,16 @@ const SideMenu = () => {
         {HOME_MENUS.length &&
           HOME_MENUS.map((home_menu) => {
             return (
-              <li
+              <Link to="/"
                 key={home_menu.name}
-                className="flex w-full cursor-pointer items-center rounded-lg px-2.5 py-3 pl-6 hover:bg-gray-50"
               >
-                {home_menu.icon} <small className="ml-5 text-base">{home_menu.name}</small>
-              </li>
+                <li
+                  onClick={() => console.log('clicked')}
+                  className="flex w-full cursor-pointer items-center rounded-lg px-2.5 py-3 pl-6 hover:bg-gray-50"
+                >
+                  {home_menu.icon} <small className="ml-5 text-base">{home_menu.name}</small>
+                </li>
+              </Link>
             )
           })}
       </ul>
