@@ -11,11 +11,15 @@ import React from 'react'
 import Button from '../Button/Button'
 import TextEditor from './Editor'
 import { formatNumber } from '../../utils/setting'
+import parse from 'html-react-parser'
 
 // eslint-disable-next-line react/prop-types
 const CommentMain = ({ post }) => {
 
   const voteCount = post?.data?.ups - post?.data?.downs
+
+  
+
   return (
     <>
       <div className="flex gap-2">
@@ -42,10 +46,11 @@ const CommentMain = ({ post }) => {
             </a>
           </div>
           <div dangerouslySetInnerHTML={{
-            __html: post?.data?.selftext
-          }} className="text-sm mt-5 leading-6"
-          >
-          </div>
+            __html: parse(decodeURIComponent(post?.data?.selftext_html))
+          }} className="mt-5 text-sm leading-6"
+          /> 
+
+
           <div className="mt-5 flex justify-between gap-3">
             <div className="flex gap-3">
               <div className="flex cursor-pointer items-center gap-1">
